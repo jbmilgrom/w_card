@@ -18,7 +18,8 @@ def cost_of_card(gen, overhead, num_cards)
   gen + overhead * (num_cards-1)
 end
 
-# total cost of a 'num_cards' number of cards
+# total cost of a 'num_cards' number of cards for the sorted container array,
+# ordered by overhead cost
 def total_cost(sorted_container_array, num_cards)
   total_cost = 0
   sorted_container_array[0..(num_cards-1)].each do |value|
