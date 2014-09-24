@@ -110,7 +110,7 @@ def total_card_combs(star_counter)
   return c
 end
 
-# method for finding factorial of num >= 0
+# find factorial of num >= 0
 def factrl(num)
   num > 0 ? num.downto(1).inject(:*) : 1
 end
