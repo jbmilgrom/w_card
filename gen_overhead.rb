@@ -5,10 +5,10 @@ $overhead =[21, 16, 19, 26, 26, 7, 1, 8, 17, 14, 15, 25, 20, 3, 24, 5, 28, 9, 2,
 # in any max-min calculation
 # so, pairing $gen and $over values in wrapper array
 # sorting wrapper array by OVERHEAD values
-def sorted_container_array(a1, a2)
+def sorted_container_array
   b =[] 
-  a1.each_with_index do |v, i|
-    b << [v, a2[i]]
+  $overhead.each_with_index do |v, i|
+    b << [v, $generation[i]]
   end
   return b.sort #this is the crux of the solution
 end
@@ -19,7 +19,7 @@ end
 def max_cards(budget, total_cards)
   max_cards = 0
   for num_of_cards in (1..total_cards)
-    break if total_cost(sorted_container_array($overhead, $generation), num_of_cards) > budget
+    break if total_cost(sorted_container_array, num_of_cards) > budget
     max_cards = num_of_cards
   end
   return max_cards
