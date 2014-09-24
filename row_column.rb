@@ -114,7 +114,7 @@ end
 
 # all the possible positions of the '*'s in excess of the 5 spots reserved for cards.
 # for a group with m members (where m >= 5), determine the number of combinations comprising 
-# a subgroup of size (m - 5) pooled from the m members of the larger group
+# a subgroup of size (m - 5) pooled from the m members of the larger group.
 # in this problem, the m members can be thought of as all '*'s, where, as part of the problem, the
 # '*'s in excess of 5 (i.e. not reserved for 5) determine the size of the subgroup of members.
 def cmbnation(m)
