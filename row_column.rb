@@ -82,6 +82,8 @@ def columns_to_rows(arr_of_arrays, row)
     @array_of_column_arrays[row] = [] unless @array_of_column_arrays[row]
     @array_of_column_arrays[row] << array.pop
   end
+  # recursively call columns_to_rows until arr_of_arrays is empty
+  # then return new array wrapper organized around @text's columns
   arr_of_arrays[0][0] ? columns_to_rows(arr_of_arrays, row + 1) : @array_of_column_arrays
 end
 
