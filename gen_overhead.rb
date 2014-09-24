@@ -26,7 +26,7 @@ def max_cards(budget, total_cards)
 end
 
 # total cost of a 'num_cards' number of cards for the sorted container array,
-# ordered by overhead cost
+# which is ordered by overhead cost
 def total_cost(sorted_container_array, num_cards)
   total_cost = 0
   sorted_container_array[0..(num_cards-1)].each do |value|
