@@ -108,7 +108,7 @@ end
 # and return the total amount
 def total_card_combs(star_counter)
   c = 0
-  star_counter.each { |num_of_stars| c += factrl(5) * cmbnation(num_of_stars) if num_of_stars > 4 }
+  star_counter.each { |num_of_stars| c += prmutation(5) * cmbnation(num_of_stars) if num_of_stars > 4 }
   return c
 end
 
@@ -119,7 +119,10 @@ def cmbnation(m)
   factrl(m) / ( factrl(m - 5) * factrl(5) )
 end
 
-# for a set of 5 '*', the number of position of 5 stars can be found through  
+def prmutation(num)
+  factrl(num)
+end
+
 # find factorial of num >= 0
 def factrl(num)
   num > 0 ? num.downto(1).inject(:*) : 1
