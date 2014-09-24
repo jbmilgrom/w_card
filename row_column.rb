@@ -89,6 +89,7 @@ end
 ####### STEP 3 #######
 ######################
 # count the number of '*' that occur in a given row
+# return an array of such numbers
 def star_counter(arr_of_arrys)
   counter_arr = []
   arr_of_arrys.each do |array|
