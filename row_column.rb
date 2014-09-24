@@ -112,11 +112,6 @@ def total_card_combs(star_counter)
   return c
 end
 
-# find factorial of num >= 0
-def factrl(num)
-  num > 0 ? num.downto(1).inject(:*) : 1
-end
-
 # for a group with m members (where m >= 5), determine the number of combinations comprising 
 # a subgroup of size (m - 5) pooled from the m members of the larger group
 # in this problem, the group can be thought of as the 5 cards plus any potentially unused "*"s.
@@ -124,6 +119,11 @@ def cmbnation(m)
   factrl(m) / ( factrl(m - 5) * factrl(5) )
 end
 
+# for a set of 5 '*', the number of position of 5 stars can be found through  
+# find factorial of num >= 0
+def factrl(num)
+  num > 0 ? num.downto(1).inject(:*) : 1
+end
 
 ###### RESULTS #######
 ######################
