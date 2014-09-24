@@ -53,7 +53,6 @@ XXXXX*XXXXXXXX*XXXXX*X*XXXXXXXXXXXXX*XX*XXXXXXX**X"
 ####### STEP 1 #######
 ######################
 # parse the text string above into an array of rows, themselves, each, an array of chars
-# corresponding to a given row
 def array_of_row_arrays(text)
   c = 0
   arr = []
