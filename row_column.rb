@@ -112,18 +112,21 @@ def total_card_combs(star_counter)
   return c
 end
 
+# all the possible positions of the '*'s in excess of the 5 spots reserved for cards
 # for a group with m members (where m >= 5), determine the number of combinations comprising 
 # a subgroup of size (m - 5) pooled from the m members of the larger group
-# in this problem, the group can be thought of as the 5 cards plus any potentially unused "*"s.
+# in this problem, the m members can be thought of as all '*'s, where, as part of the problem, the
+# '*'s in excess of 5 (i.e. not reserved for 5) determine the size of the subgroup of members.
 def cmbnation(m)
   factrl(m) / ( factrl(m - 5) * factrl(5) )
 end
 
+# all the possible ordered arrangments of 'num' number of cards
 def prmutation(num)
   factrl(num)
 end
 
-# find factorial of num >= 0
+# factorial of num >= 0
 def factrl(num)
   num > 0 ? num.downto(1).inject(:*) : 1
 end
