@@ -74,7 +74,7 @@ end
 ####### STEP 2 #######
 ######################
 # turn the array of rows into an array of columns
-# so that the below methods (i.e. steps 3 & 4) can now be equally applicable to columns as rows
+# so that the below methods (i.e. steps 3 & 4) can now be equally applicable to columns and rows
 @array_of_column_arrays = []
 def rows_to_columns(arr_of_row_arrays, row)
   arr_of_row_arrays.each do |array|
