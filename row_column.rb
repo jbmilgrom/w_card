@@ -74,7 +74,7 @@ end
 
 ####### STEP 2 #######
 ######################
-# turns the array or rows into an array of columns
+# turns the array of rows into an array of columns
 # as a result, the above methods can now be used on the columns as well
 @array_of_column_arrays = []
 def columns_to_rows(arr_of_arrays, row)
