@@ -1,0 +1,135 @@
+@text = 
+"XXXXXXXXXXXXX*X*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXX*XXXXXXXXXXXXXXXXXXXXXXXXXXXXX*XXX*XXXX*XX
+XXXXXXXXXXXXXXXX*XXXXXXXX*XXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXX*XXXXXXXXXXXXX**XXX*XX*XX*XX*XXXXXXXXXXXXXXXXXX
+XXXXXXXXXXX*XXXX*XXXXXXXX*XXXXXXXXXX*XXXXXX*XXXXXX
+XXXXXXXX*XXXXXXXXXXXXX*XXXXX*XXXXX*X**XXXXXXXXXXXX
+XXXXXXXXXXXX*XXXXXXXXXXXXXXXXXXXXXXXXXXXX*X*XXXXXX
+XXXX*XXXXXXXX*XXXXXXX**XXXX**XXXXXXXXXXXXXXXXXXXXX
+**XXXXXXXXXX*XXXXXX*XXXXXXXXXXX*XXXXXXXXXXXXXXXXX*
+XXXXXXXXXXXXXXXXXX*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXX*XXXXXXXXXXXX*XXXXXXXXXX*XXXXXXXXXXXXXXXXXXX
+*XXXXXXXXXXXXXXXXXXXX**XX***XX*XXXXXXXXXXXXX*XXXXX
+XXXXXXXXXXX*XXX**XX*X*XXXX*XXX*X*XXX*XXXXX*XXXXXXX
+XXXXXXXXXXXXX*XXXXXXXXXX*XXXXX*XXXXXXXXX*XXXXXXXXX
+XXXXXXXXXXXXXXXXX*XXXXX*XXX*XXXX*XXXXXXXXX*XXXXXXX
+XXXXXXXX*X*XXXXXXX*XXXXXXXXXXXXXXX*X*XXXX*XX*XXXXX
+XXXXXXXXX*X*XXXXX*XXXXXX**XXXXXXXXXX*XX*XXXXXXX*XX
+XXXXXXXXXXXXXXXX**XX*XX*XXXXXXXXXXXXXX*XXXXXXXXXXX
+XXXXXXX**XXX*XXXXXXXXXXXXX*XXXXXXXXXXXXXX*XXXXXXXX
+XXXX*XXX*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXX*XXXXXXXXX**XXXXX*XXXXXXXXXX*XXXXXX*XXXXX
+XXXXXX*XXX**XXXXXXXXXX*XX*XXX*XXXXXXXXXXXX*XXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXX*XXXXXX*XX*XXXXXXX***XXXXXXXXXXXXXXXXXXXX*XXXX
+XX**XXXXXXXXXXXXXXXX**X*XXXXX*XXXXXXXXX*XXXXXXXXXX
+*X*XXXXXXXX**X*XXXXXXXXX*XXXXXXXXXXX*XXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+*XXXXXXX*XXXXXXXXXXXXX**XXXXXXX*XXXX*XXX*XXXXXXXXX
+X*XXXXXXXXXXX*XXXXXX*XXXXXXX**X*XX*XXXXXXXXXXXXXX*
+XXXXXXXXXXXXXXXXXX**XXXXXXXXXXX*XXXXXXXXX*XX*X*XXX
+XXXXXXXXX*XXXXXXXXX*XXXXXXXXXXXXXX*XXXXXXXX*XX*X*X
+XXXXXXXXXXXXXXXXXX*XXXX*XXX*XXXX*XXXXXXXXXXX*XXX*X
+XXXXXXXXXXX*XXXXX*XXXXXX*XXX*XXXXXXXXXXXXXXXXXXXXX
+X*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX**XXXXXXX
+XXXXXXXXX*X*XXXX*XXXXXXXXXXXXXXXXXXXXXXXXX*X*XXXXX
+XXX*XXXXXXXXXXXXX*XXXXXXXXXXX*XXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXX*XX*XXXX*XXXXXXXXXXXXX*XXXXX*X*XXXX*XXXX
+X*XX*XXX*X*XXXXXXXXXXXXXXXXXXXX*XXXXXXXXXXXXXXXXXX
+XXXXXXXXXX*XXXXXXXXXXXXXXXXXXXXXXXX*XXXXXX**XXXXXX
+**XXXXXXXXXXX*XXXXXXXXXXXXX*XXXXXXXXXXXX*XXXXX*XXX
+X*XXXXXXXXXXXXXXXXXXXXXXXXXXXX*XX**XXXXX*XXXXXXXXX
+XXXXXXXXXXXXXX*XXX*XXXXXXXXX*XXXXXXXX**XXXXXXX*XXX
+XXXXXXXXXX*XXXXXXXXXXXXXXX*X*XXXXXXXXXXXXXXXX*XXXX
+XXXXXXXXXXX*XXXX*XXXXXXXXXXXX*XXXX*XXXXXXXXX*XXXXX
+XXXXXXXXXXXXX*XXXXXXXXXXXXX*XXXX*XXXX*XXXXXXXXXXXX
+XXXXXXXXXXX*XXXXX*XXXXXXXXXXXX*XXXXXXXXXXXX*XXXX*X
+XXXXXXX*XXXXXXXXXXXXXXXX*XX*XXXXXXXX*XXXXXXXXXXXXX
+XXXXXX*XXX*XXXXXXXXXXXXXXXXXXXXXXXXXX*XXXXXXX*XXXX
+XXXXX*XXXXXXXX*XXXXX*X*XXXXXXXXXXXXX*XX*XXXXXXX**X"
+
+####### STEP 1 #######
+######################
+# parse the text string above into an array of rows, themselves, each, an array of chars
+# corresponding to a given row
+def array_of_row_arrays(text)
+  c = 0
+  arr = []
+  arr_of_arrys = []
+  # add "\n" to last row of string to make symmetric with previous rows
+  # creating an array every 51 chars, and push such array into container array
+  text.split('').push('\n').each_with_index do |value, i| 
+    c += 1
+    arr << value
+    if c == 51
+      c = 0
+      arr_of_arrys << arr
+      arr = []
+    end
+  end
+  return arr_of_arrys
+end
+
+####### STEP 2 #######
+######################
+# turns the array or rows into an array of columns
+# as a result, the above methods can now be used on the columns as well
+@array_of_column_arrays = []
+def columns_to_rows(arr_of_arrays, row)
+  arr_of_arrays.each do |array|
+    @array_of_column_arrays[row] = [] unless @array_of_column_arrays[row]
+    @array_of_column_arrays[row] << array.pop
+  end
+  arr_of_arrays[0][0] ? columns_to_rows(arr_of_arrays, row + 1) : @array_of_column_arrays
+end
+
+####### STEP 3 #######
+######################
+# count the number of '*' that occur in a given row
+def star_counter(arr_of_arrys)
+  counter_arr = []
+  arr_of_arrys.each do |array|
+    num_of_stars = 0
+    array.each do |value|
+        num_of_stars += 1 if value == "*"
+    end
+    counter_arr << num_of_stars
+  end
+  return counter_arr
+end
+
+####### STEP 4 #######
+######################
+# given the amount of '*' in a given row/column count the number of permutations/combinations that may occur
+def total_card_combs(star_counter)
+  c = 0
+  star_counter.each { |num_of_stars| c += factrl(5) * cmbnation(num_of_stars) if num_of_stars > 4 }
+  return c
+end
+
+# method for finding factorial of num >= 0
+def factrl(num)
+  num > 0 ? num.downto(1).inject(:*) : 1
+end
+
+# for a group with m members, method that determines the number of combinations comprising a subgroup of 
+# size (m - 5) pooled from the m members of the larger group
+# in this problem, the group can be thought of as the 5 cards plus any potentially unused "*"s.
+def cmbnation(m)
+  factrl(m) / ( factrl(m - 5) * factrl(5) )
+end
+
+
+###### RESULTS #######
+######################
+puts "total combinations of card arrangements (rows): #{total_card_combs(star_counter(array_of_row_arrays(@text)))}"
+# puts "total combinations for arrangements (rows): 84840"
+
+puts "total combinations of card arrangements (rows): #{total_card_combs(star_counter(columns_to_rows(array_of_row_arrays(@text), 0)))}"
+# "total combinations card arrangements (rows): 82320"
+
+puts "total combinations of card arrangements (rows plus columns): #{total_card_combs(star_counter(@array_of_column_arrays)) +  total_card_combs(star_counter(array_of_row_arrays(@text)))}"
+# "total combinations card arrangements (rows plus columens): 167160"
+
