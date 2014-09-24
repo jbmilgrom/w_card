@@ -13,7 +13,7 @@ def sorted_container_array(a1, a2)
   return b.sort #this is the crux of the solution
 end
 
-# cost of a card in a certain size set of cards, given the parameters of the problem
+# cost of a card in a set of cards of size 'num_cards', given the parameters of the problem
 def cost_of_card(gen, overhead, num_cards)
   gen + overhead * (num_cards-1)
 end
