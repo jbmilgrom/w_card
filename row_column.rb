@@ -105,6 +105,7 @@ end
 ####### STEP 4 #######
 ######################
 # given the amount of '*' in a given row/column, count the number of permutations/combinations that may occur
+# and return the total amount
 def total_card_combs(star_counter)
   c = 0
   star_counter.each { |num_of_stars| c += factrl(5) * cmbnation(num_of_stars) if num_of_stars > 4 }
