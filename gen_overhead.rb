@@ -13,9 +13,16 @@ def sorted_container_array(a1, a2)
   return b.sort #this is the crux of the solution
 end
 
-# cost of a card in a set of cards of size 'num_cards', given the parameters of the problem
-def cost_of_card(gen, overhead, num_cards)
-  gen + overhead * (num_cards-1)
+# because the wrapper array as been sorted in order of increasing overhead costs,
+# max cards can be determined by linearly increasing number of cards and breaking
+# only once the set budget has been exceeded
+def max_cards(budget, total_cards)
+  max_cards = 0
+  for num_of_cards in (1..total_cards)
+    break if total_cost(sorted_container_array($overhead, $generation), num_of_cards) > budget
+    max_cards = num_of_cards
+  end
+  return max_cards
 end
 
 # total cost of a 'num_cards' number of cards for the sorted container array,
@@ -28,16 +35,9 @@ def total_cost(sorted_container_array, num_cards)
   return total_cost
 end
 
-# because the wrapper array as been sorted in order of increasing overhead costs,
-# max cards can be determined by linearly increasing number of cards and breaking
-# only once the set budget has been exceeded
-def max_cards(budget, total_cards)
-  max_cards = 0
-  for num_of_cards in (1..total_cards)
-    break if total_cost(sorted_container_array($overhead, $generation), num_of_cards) > budget
-    max_cards = num_of_cards
-  end
-  return max_cards
+# cost of a card in a set of cards of size 'num_cards', given the parameters of the problem
+def cost_of_card(gen, overhead, num_cards)
+  gen + overhead * (num_cards-1)
 end
 
 ###### RESULTS #######
