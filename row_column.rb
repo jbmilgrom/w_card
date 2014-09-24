@@ -82,7 +82,7 @@ def rows_to_columns(arr_of_row_arrays, row)
     @array_of_column_arrays[row] << array.pop
   end
   # recursively call rows_to_columns until arr_of_row_arrays is empty
-  # then return new array wrapper organized around @text's columns
+  # then return new array wrapper now organized around @text's columns
   arr_of_row_arrays[0][0] ? rows_to_columns(arr_of_row_arrays, row + 1) : @array_of_column_arrays
 end
 
