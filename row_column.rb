@@ -77,14 +77,14 @@ end
 # turns the array of rows into an array of columns
 # so that the below methods (i.e. steps 3 & 4) can now be equally applicable to columns as rows
 @array_of_column_arrays = []
-def columns_to_rows(arr_of_row_arrays, row)
+def rows_to_columns(arr_of_row_arrays, row)
   arr_of_row_arrays.each do |array|
     @array_of_column_arrays[row] = [] unless @array_of_column_arrays[row]
     @array_of_column_arrays[row] << array.pop
   end
-  # recursively call columns_to_rows until arr_of_row_arrays is empty
+  # recursively call rows_to_columns until arr_of_row_arrays is empty
   # then return new array wrapper organized around @text's columns
-  arr_of_row_arrays[0][0] ? columns_to_rows(arr_of_row_arrays, row + 1) : @array_of_column_arrays
+  arr_of_row_arrays[0][0] ? rows_to_columns(arr_of_row_arrays, row + 1) : @array_of_column_arrays
 end
 
 ####### STEP 3 #######
@@ -129,7 +129,7 @@ end
 puts "total combinations of card arrangements (rows): #{total_card_combs(star_counter(array_of_row_arrays(@text)))}"
 # puts "total combinations for arrangements (rows): 84840"
 
-puts "total combinations of card arrangements (rows): #{total_card_combs(star_counter(columns_to_rows(array_of_row_arrays(@text), 0)))}"
+puts "total combinations of card arrangements (rows): #{total_card_combs(star_counter(rows_to_columns(array_of_row_arrays(@text), 0)))}"
 # "total combinations card arrangements (rows): 82320"
 
 puts "total combinations of card arrangements (rows plus columns): #{total_card_combs(star_counter(@array_of_column_arrays)) +  total_card_combs(star_counter(array_of_row_arrays(@text)))}"
