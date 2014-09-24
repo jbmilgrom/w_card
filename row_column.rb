@@ -128,8 +128,8 @@ end
 puts "total combinations of card arrangements (rows): #{total_card_combs(star_counter(array_of_row_arrays(@text)))}"
 # puts "total combinations for arrangements (rows): 84840"
 
-puts "total combinations of card arrangements (rows): #{total_card_combs(star_counter(rows_to_columns(array_of_row_arrays(@text), 0)))}"
-# "total combinations card arrangements (rows): 82320"
+puts "total combinations of card arrangements (columns): #{total_card_combs(star_counter(rows_to_columns(array_of_row_arrays(@text), 0)))}"
+# "total combinations card arrangements (columns): 82320"
 
 puts "total combinations of card arrangements (rows plus columns): #{total_card_combs(star_counter(@array_of_column_arrays)) +  total_card_combs(star_counter(array_of_row_arrays(@text)))}"
 # "total combinations card arrangements (rows plus columns): 167160"
