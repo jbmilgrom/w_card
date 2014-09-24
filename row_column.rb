@@ -73,7 +73,7 @@ end
 
 ####### STEP 2 #######
 ######################
-# turns the array of rows into an array of columns
+# turn the array of rows into an array of columns
 # so that the below methods (i.e. steps 3 & 4) can now be equally applicable to columns as rows
 @array_of_column_arrays = []
 def rows_to_columns(arr_of_row_arrays, row)
@@ -103,7 +103,7 @@ end
 
 ####### STEP 4 #######
 ######################
-# given the amount of '*' in a given row/column count the number of permutations/combinations that may occur
+# given the amount of '*' in a given row/column, count the number of permutations/combinations that may occur
 def total_card_combs(star_counter)
   c = 0
   star_counter.each { |num_of_stars| c += factrl(5) * cmbnation(num_of_stars) if num_of_stars > 4 }
@@ -115,7 +115,7 @@ def factrl(num)
   num > 0 ? num.downto(1).inject(:*) : 1
 end
 
-# for a group with m members, method that determines the number of combinations comprising a subgroup of 
+# for a group with m members, determine the number of combinations comprising a subgroup of 
 # size (m - 5) pooled from the m members of the larger group
 # in this problem, the group can be thought of as the 5 cards plus any potentially unused "*"s.
 def cmbnation(m)
